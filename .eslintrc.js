@@ -2,27 +2,25 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
-  extends: 'airbnb',
+  extends: "airbnb",
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: "module"
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ["react"],
   rules: {
-    jsx-a11y/click-events-have-key-events: "off",
-        jsx-a11y/no-static-element-interactions: "off",
-        react/prefer-stateless-function: "off",
-        semi: "off"
-  },
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/prefer-stateless-function": "off",
+    semi: "off"
+  }
 };
