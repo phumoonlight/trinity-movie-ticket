@@ -1,2 +1,2 @@
-import withCSS from '@zeit/next-css'
-module.exports = withCSS()
+const NextCSS = require('@zeit/next-css')
+module.exports = NextCSS()
