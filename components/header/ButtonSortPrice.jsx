@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import './ButtonSortPrice.css'
 
-export default class ButtonSortPrice extends Component {
+class ButtonSortPrice extends Component {
   render() {
     return (
-      <div>
-        
+      <div className="sortprice">
+        <button type="button" onClick="" >sort-Price</button>
       </div>
     )
   }
 }
+export default ButtonSortPrice
