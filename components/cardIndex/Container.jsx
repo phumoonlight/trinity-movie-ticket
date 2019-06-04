@@ -4,8 +4,10 @@ import {
   Card,
   Col,
   Row,
+  Button,
 } from 'antd'
 import moviesApi from '../../api/movies'
+
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
@@ -19,6 +21,7 @@ class Container extends Component {
     super(props)
     this.state = {
       movies: [],
+      sortType: '',
     }
     this.getMovies()
   }
@@ -28,9 +31,33 @@ class Container extends Component {
     await this.setState({ movies: data })
   }
 
+  sort = (type) => {
+    this.setState({
+      sortType: type,
+    })
+  }
+
+
   mapping = () => {
-    const { movies } = this.state
+    let { movies } = this.state
+    const { sortType } = this.state
+
+    if (sortType === 'Date') {
+      movies = movies.sort((a, b) => (
+        new Date(b.date) - new Date(a.date)// เรียงตามวัน
+      ))
+      console.log('Date')
+    } else if (sortType === 'Price') {
+      console.log('Price')
+      movies = movies.sort((a, b) => (
+        (a.price) - (b.price)// เรียงตามราคา
+
+      ))
+    }
+    // (a.price) + (b.price)//เรียงตามราคา
+
     return movies.map(movie => (
+
       <Col span={6}>
         <Card>
           <div className="custom-image">
@@ -38,6 +65,10 @@ class Container extends Component {
           </div>
           <div className="custom-card">
             <h3>{movie.name}</h3>
+            {movie.price}
+            {' บาท'}
+            <br />
+            {movie.date}
           </div>
         </Card>
       </Col>
@@ -46,9 +77,13 @@ class Container extends Component {
 
   render() {
     return (
-      <Content style={style}>
-        <Row gutter={16}>{this.mapping()}</Row>
-      </Content>
+      <div>
+        <Button onClick={() => this.sort('Date')} type="Date">Date</Button>
+        <Button onClick={() => this.sort('Price')} type="Price">Price</Button>
+        <Content style={style}>
+          <Row gutter={16}>{this.mapping()}</Row>
+        </Content>
+      </div>
     )
   }
 }
