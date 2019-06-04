@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
-import './ButtonSortPrice.css'
 
 class ButtonSortPrice extends Component {
   render() {

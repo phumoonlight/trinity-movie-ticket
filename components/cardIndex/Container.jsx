@@ -5,6 +5,7 @@ import {
   Col,
   Row,
 } from 'antd'
+import Menu from '../header/Menu'
 import moviesApi from '../../api/movies'
 
 const { Content } = Layout
@@ -29,7 +30,10 @@ class Container extends Component {
   }
 
   mapping = () => {
-    const { movies } = this.state
+    let { movies } = this.state
+    movies = movies.sort((a, b) => (
+      new Date(b.date) - new Date(a.date)
+    ))
     return movies.map(movie => (
       <Col span={6}>
         <Card>
@@ -47,6 +51,7 @@ class Container extends Component {
   render() {
     return (
       <Content style={style}>
+        <Menu />
         <Row gutter={16}>{this.mapping()}</Row>
       </Content>
     )
