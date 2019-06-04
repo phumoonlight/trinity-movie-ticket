@@ -1,14 +1,14 @@
 import React from 'react'
-// import Heads from '../components/header/Heads'
 import Card from '../components/cardIndex/Card'
-import Heads from '../components/header/Heads';
-// import Header from '../components/header/Header'
+// import Heads from '../components/header/Heads';
+import Header from '../components/header/Header'
+import 'antd/dist/antd.css'
 
 
 function Home() {
   return (
     <div>
-      <Heads />
+      <Header />
       <Card />
     </div>
   )
