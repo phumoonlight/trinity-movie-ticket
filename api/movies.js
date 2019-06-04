@@ -1,13 +1,13 @@
 import Axios from 'axios';
 
 const getMovies = async () => {
-  const data = await Axios.get('http://localhost:8080/movies')
-  return data
+  const result = await Axios.get('http://localhost:8080/movies')
+  return result.data
 }
 
 const getMoviesByID = async () => {
-  const data = await Axios.get('http://localhost:8080/movies/:id')
-  return data
+  const result = await Axios.get('http://localhost:8080/movies/:id')
+  return result.data
 }
 
 export default {
