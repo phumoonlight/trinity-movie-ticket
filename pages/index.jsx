@@ -1,11 +1,14 @@
 import React from 'react'
-import Header from '../components/header/Header'
+// import Heads from '../components/header/Heads'
+import Card from '../components/cardIndex/Card'
+import Heads from '../components/header/Heads';
+// import Header from '../components/header/Header'
 
 function Home() {
   return (
     <div>
-      <Header />
-      <h1>Home</h1>
+      <Heads />
+      <Card />
     </div>
   )
 }
