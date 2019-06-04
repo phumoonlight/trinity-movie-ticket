@@ -1,14 +1,53 @@
 import React, { Component } from 'react'
-import { Layout } from 'antd';
-import Card from './Card'
+import {
+  Layout,
+  Card,
+  Col,
+  Row,
+} from 'antd'
+import moviesApi from '../../api/movies'
 
-const { Content } = Layout;
+const { Content } = Layout
+const style = { padding: '1em', marginTop: '5em' }
+const imgStyle = {
+  width: '100%',
+  height: '23rem',
+}
+
 class Container extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      movies: [],
+    }
+    this.getMovies()
+  }
+
+  getMovies = async () => {
+    const data = await moviesApi.getMovies()
+    await this.setState({ movies: data })
+  }
+
+  mapping = () => {
+    const { movies } = this.state
+    return movies.map(movie => (
+      <Col span={6}>
+        <Card>
+          <div className="custom-image">
+            <img src={movie.image} alt="movie" style={imgStyle} />
+          </div>
+          <div className="custom-card">
+            <h3>{movie.name}</h3>
+          </div>
+        </Card>
+      </Col>
+    ))
+  }
+
   render() {
     return (
-      <Content style={{ padding: '0 50px' }}>
-        <div style={{ background: '#fff', padding: 24, minHeight: 10 }} />
-        <Card />
+      <Content style={style}>
+        <Row gutter={16}>{this.mapping()}</Row>
       </Content>
     )
   }
