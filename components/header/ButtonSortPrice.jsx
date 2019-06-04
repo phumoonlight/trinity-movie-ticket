@@ -5,9 +5,7 @@ import './ButtonSortPrice.css'
 class ButtonSortPrice extends Component {
   render() {
     return (
-      <div>
-        <Button size="small">SortPrice</Button>
-      </div>
+      <Button size="small">SortPrice</Button>
     )
   }
 }

@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 
+import { Layout } from 'antd';
 import ButtonSortDate from './ButtonSortDate'
 import ButtonSortPrice from './ButtonSortPrice'
 import SearchBar from './SearchBar'
+
+
 import './Header.css'
 
-class Header extends Component {
+const { Header } = Layout;
+
+class Headers extends Component {
   render() {
     return (
-      <div className="header">
-        <h1> Header. </h1>
-        <SearchBar />
-        <ButtonSortDate />
-        <ButtonSortPrice />
-      </div>
+      <Header style={{ zIndex: 1, width: '100%' }}>
+        <div className="header">
+          <SearchBar />
+          <ButtonSortDate />
+          <ButtonSortPrice />
+        </div>
+      </Header>
+
     );
   }
 }
-export default Header;
+export default Headers;
