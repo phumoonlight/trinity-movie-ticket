@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Button } from 'antd'
 import './ButtonSortDate.css'
 
 class ButtonSortDate extends Component {
   render() {
     return (
-      <div className="sortdate">
-        <button type="button" onClick="" >sort-Date</button>
+      <div>
+        <Button size="small">SortPrice</Button>
       </div>
     )
   }
