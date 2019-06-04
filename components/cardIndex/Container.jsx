@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import { Layout } from 'antd';
+import Card from './Card'
 
-export default class Container extends Component {
+const { Content } = Layout;
+class Container extends Component {
   render() {
     return (
-      <div />
+      <Content style={{ padding: '0 50px' }}>
+        <div style={{ background: '#fff', padding: 24, minHeight: 10 }} />
+        <Card />
+      </Content>
     )
   }
 }
+export default Container
