@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './SearchBar.css'
 import { Input } from 'antd';
 
 const { Search } = Input;

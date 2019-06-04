@@ -4,8 +4,8 @@ import {
   Card,
   Col,
   Row,
-  Button,
 } from 'antd'
+import Menu from './Menu'
 import moviesApi from '../../api/movies'
 
 
@@ -37,22 +37,28 @@ class Container extends Component {
     })
   }
 
+  getSortType = (type) => {
+    console.log(type)
+    this.setState({ sortType: type })
+  }
 
   mapping = () => {
     let { movies } = this.state
     const { sortType } = this.state
 
-    if (sortType === 'Date') {
+    if (sortType === 'sortdate') {
       movies = movies.sort((a, b) => (
         new Date(b.date) - new Date(a.date)// เรียงตามวัน
       ))
       console.log('Date')
-    } else if (sortType === 'Price') {
+    } else if (sortType === 'sortprice') {
       console.log('Price')
       movies = movies.sort((a, b) => (
         (a.price) - (b.price)// เรียงตามราคา
 
       ))
+    } else {
+      this.getMovies()
     }
     // (a.price) + (b.price)//เรียงตามราคา
 
@@ -78,9 +84,8 @@ class Container extends Component {
   render() {
     return (
       <div>
-        <Button onClick={() => this.sort('Date')} type="Date">Date</Button>
-        <Button onClick={() => this.sort('Price')} type="Price">Price</Button>
         <Content style={style}>
+          <Menu func={this.getSortType} />
           <Row gutter={16}>{this.mapping()}</Row>
         </Content>
       </div>
