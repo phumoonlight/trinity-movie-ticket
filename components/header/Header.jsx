@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 
 import { Layout } from 'antd';
-import ButtonSortDate from './ButtonSortDate'
-import ButtonSortPrice from './ButtonSortPrice'
 import SearchBar from './SearchBar'
 import Icon from './Icon'
 
@@ -17,8 +15,6 @@ class Headers extends Component {
         <Icon />
         <div className="header">
           <SearchBar />
-          <ButtonSortDate />
-          <ButtonSortPrice />
         </div>
       </Header>
 

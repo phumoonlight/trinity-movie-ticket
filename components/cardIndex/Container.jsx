@@ -5,8 +5,9 @@ import {
   Col,
   Row,
 } from 'antd'
-import Menu from '../header/Menu'
+import Menu from './Menu'
 import moviesApi from '../../api/movies'
+
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
@@ -20,6 +21,7 @@ class Container extends Component {
     super(props)
     this.state = {
       movies: [],
+      sortType: '',
     }
     this.getMovies()
   }
@@ -29,12 +31,39 @@ class Container extends Component {
     await this.setState({ movies: data })
   }
 
+  sort = (type) => {
+    this.setState({
+      sortType: type,
+    })
+  }
+
+  getSortType = (type) => {
+    console.log(type)
+    this.setState({ sortType: type })
+  }
+
   mapping = () => {
     let { movies } = this.state
-    movies = movies.sort((a, b) => (
-      new Date(b.date) - new Date(a.date)
-    ))
+    const { sortType } = this.state
+
+    if (sortType === 'sortdate') {
+      movies = movies.sort((a, b) => (
+        new Date(b.date) - new Date(a.date)// เรียงตามวัน
+      ))
+      console.log('Date')
+    } else if (sortType === 'sortprice') {
+      console.log('Price')
+      movies = movies.sort((a, b) => (
+        (a.price) - (b.price)// เรียงตามราคา
+
+      ))
+    } else {
+      this.getMovies()
+    }
+    // (a.price) + (b.price)//เรียงตามราคา
+
     return movies.map(movie => (
+
       <Col span={6}>
         <Card>
           <div className="custom-image">
@@ -42,6 +71,10 @@ class Container extends Component {
           </div>
           <div className="custom-card">
             <h3>{movie.name}</h3>
+            {movie.price}
+            {' บาท'}
+            <br />
+            {movie.date}
           </div>
         </Card>
       </Col>
@@ -50,10 +83,12 @@ class Container extends Component {
 
   render() {
     return (
-      <Content style={style}>
-        <Menu />
-        <Row gutter={16}>{this.mapping()}</Row>
-      </Content>
+      <div>
+        <Content style={style}>
+          <Menu func={this.getSortType} />
+          <Row gutter={16}>{this.mapping()}</Row>
+        </Content>
+      </div>
     )
   }
 }

@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import { Menu } from 'antd';
-import Text from './Text'
-import './Header.css'
+import Text from '../header/Text'
+import './Card.css'
 
 class Menus extends Component {
   state = {
     current: 'now',
   };
 
-  handleClick = (e) => {
-    console.log('click ', e);
-    this.setState({
+
+  handleClick = async (e) => {
+    const { func } = this.props
+    await this.setState({
       current: e.key,
     });
+    const { current } = this.state
+    func(current)
   };
 
   render() {
