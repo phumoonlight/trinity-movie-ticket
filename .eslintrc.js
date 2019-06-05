@@ -19,9 +19,9 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "react/prefer-stateless-function": "off",
     "semi": "off",
     "no-underscore-dangle": "off",
   }
