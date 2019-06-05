@@ -1,47 +1,56 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Menu } from 'antd';
+import { Menu } from 'antd'
 import Text from '../header/Text'
 import './Card.css'
 
+const style = {
+  container: { textAlign: 'center' },
+  textHeader: {
+    display: 'inline-block',
+    fontSize: '2.5rem',
+    paddingBottom: '2.5rem',
+  },
+}
 
 class Menus extends Component {
   state = {
-    current: 'now',
-  };
-
+    type: 'now',
+  }
 
   handleClick = async (e) => {
-    const { func } = this.props
+    const { get } = this.props
     await this.setState({
-      current: e.key,
-    });
-    const { current } = this.state
-    func(current)
-  };
+      type: e.key,
+    })
+    const { type } = this.state
+    get(type)
+  }
 
   render() {
-    const { current } = this.state
+    const { type } = this.state
     return (
-      <div align="center">
-        <Text />
-        <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-          <Menu.Item key="now">
-          Now Showing
-          </Menu.Item>
-          <Menu.Item key="sortdate">
-          Sort-Date
-          </Menu.Item>
-          <Menu.Item key="sortprice">
-          Sort-Price
-          </Menu.Item>
+      <div style={style.container}>
+        <Text
+          style={style.textHeader}
+          context="Movies"
+        />
+        <Menu
+          onClick={this.handleClick}
+          selectedKeys={type}
+          mode="horizontal"
+        >
+          <Menu.Item key="now">Now Showing</Menu.Item>
+          <Menu.Item key="sortdate">Sort-Date</Menu.Item>
+          <Menu.Item key="sortprice">Sort-Price</Menu.Item>
         </Menu>
       </div>
-    );
+    )
   }
 }
+
 export default Menus
 
 Menus.propTypes = {
-  func: PropTypes.func.isRequired,
+  get: PropTypes.func.isRequired,
 }
