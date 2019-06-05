@@ -85,7 +85,7 @@ class Container extends Component {
     return (
       <div>
         <Content style={style}>
-          <Menu func={this.getSortType} />
+          <Menu get={this.getSortType} />
           <Row gutter={16}>{this.mapping()}</Row>
         </Content>
       </div>
