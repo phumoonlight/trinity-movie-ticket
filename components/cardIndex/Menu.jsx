@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Menu } from 'antd';
 import Text from '../header/Text'
 import './Card.css'
+
 
 class Menus extends Component {
   state = {
@@ -39,3 +41,7 @@ class Menus extends Component {
   }
 }
 export default Menus
+
+Menus.propTypes = {
+  func: PropTypes.func.isRequired,
+}
