@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes, { shape } from 'prop-types';
 
 
 const Text = (props) => {
@@ -8,7 +8,7 @@ const Text = (props) => {
 }
 
 Text.propTypes = {
-  style: PropTypes.shape,
+  style: PropTypes.objectOf(shape),
   context: PropTypes.string.isRequired,
 }
 

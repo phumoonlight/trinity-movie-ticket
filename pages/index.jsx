@@ -1,17 +1,20 @@
 import React from 'react'
 // import Card from '../components/cardIndex/Card'
 import Header from '../components/header/Header'
-import Container from '../components/cardIndex/Container'
+import IndexContainer from '../components/IndexContainer'
 import 'antd/dist/antd.css'
 
-
-function Home() {
+function Index() {
   return (
     <div>
       <Header />
-      <Container />
+      <IndexContainer />
     </div>
   )
 }
 
-export default Home
+// Index.getInitialProps = async ({ req }) => {
+//  return { }
+// }
+
+export default Index

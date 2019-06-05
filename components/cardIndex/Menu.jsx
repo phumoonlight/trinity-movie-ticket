@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
-import Text from '../header/Text'
+import Text from '../Text'
 import './Card.css'
 
 const style = {
@@ -14,11 +14,14 @@ const style = {
 }
 
 class Menus extends Component {
-  state = {
-    type: 'now',
+  constructor(props) {
+    super(props)
+    this.state = {
+      type: 'now-showing',
+    }
   }
 
-  handleClick = async (e) => {
+  setSortType = async (e) => {
     const { get } = this.props
     await this.setState({
       type: e.key,
@@ -36,13 +39,13 @@ class Menus extends Component {
           context="Movies"
         />
         <Menu
-          onClick={this.handleClick}
-          selectedKeys={type}
+          onClick={this.setSortType}
+          selectedKeys={[type]}
           mode="horizontal"
         >
-          <Menu.Item key="now">Now Showing</Menu.Item>
-          <Menu.Item key="sortdate">Sort-Date</Menu.Item>
-          <Menu.Item key="sortprice">Sort-Price</Menu.Item>
+          <Menu.Item key="now-showing">Now Showing</Menu.Item>
+          <Menu.Item key="sort-date">Sort-Date</Menu.Item>
+          <Menu.Item key="sort-price">Sort-Price</Menu.Item>
         </Menu>
       </div>
     )
