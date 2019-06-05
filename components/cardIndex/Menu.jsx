@@ -10,7 +10,6 @@ class Menus extends Component {
     current: 'now',
   };
 
-
   handleClick = async (e) => {
     const { func } = this.props
     await this.setState({
