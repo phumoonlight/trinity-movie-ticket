@@ -1,10 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
 
-class Text extends Component {
-  render() {
-    return (
-      <h1 style={{ display: 'inline-block', paddingLeft: '15px' }}>Movies</h1>
-    )
-  }
+
+const Text = (props) => {
+  const { style, context } = props
+  return <span style={style}>{context}</span>
 }
+
+Text.propTypes = {
+  style: PropTypes.shape,
+  context: PropTypes.string.isRequired,
+}
+
+Text.defaultProps = {
+  style: {},
+}
+
 export default Text
