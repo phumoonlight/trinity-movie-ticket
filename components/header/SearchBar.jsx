@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Router from 'next/router';
 import { Input } from 'antd';
 
-const { Search } = Input;
-class SearchBar extends Component {
-  render() {
-    return (
-      <Search
-        size="small"
-        placeholder="Search..."
-        onSearch={value => console.log(value)}
-        style={{ width: 200 }}
-      />
-    )
-  }
+const search = async (searchKey) => {
+  Router.push(`/?searchkey=${searchKey}`)
 }
+
+const SearchBar = () => {
+  const { Search } = Input
+  return (
+    <Search
+      size="small"
+      placeholder="Search..."
+      onSearch={search}
+      style={{ width: '20rem' }}
+    />
+  )
+}
+
 export default SearchBar
