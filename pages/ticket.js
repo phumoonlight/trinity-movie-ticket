@@ -22,7 +22,7 @@ const style = {
 
 const imgStyle = {
   margin: 'auto',
-  width: '20%',
+  width: '30%',
   float: 'left',
   padding: '10px',
 }
@@ -34,8 +34,10 @@ const card = {
 export default class ticket extends Component {
   state = {
     movie: '',
-    summary: 0,
-
+    amount: 0,
+    inputCash: 0,
+    totalPrice: 0,
+    cashChange: 0,
   }
 
   static getInitialProps({ query: { id } }) {
@@ -45,28 +47,54 @@ export default class ticket extends Component {
 
   componentDidMount = async () => {
     const { postId } = this.props
-    const data = await moviesApi.getMoviesById(postId)
-    this.setState({ movie: data })
+    const movie = await moviesApi.getMoviesById(postId)
+    this.setState({ movie })
   }
 
-  doPlus = () => {
-    const { summary } = this.state;
+  doPlus = async () => {
+    const { amount } = this.state;
+    await this.setState({
+      amount: amount + (+1),
+    });
+    this.setTotalPrice()
+  }
+
+  doMinus = async () => {
+    let { amount } = this.state;
+    if (amount === 0) {
+      amount += 1
+    }
+    await this.setState({
+      amount: amount - (+1),
+    });
+    this.setTotalPrice()
+  }
+
+  setTotalPrice = async () => {
+    const { movie, amount } = this.state;
+    await this.setState({
+      totalPrice: amount * movie.price,
+    })
+  }
+
+  onInputCash = (e) => {
+    const { value } = e.target;
     this.setState({
-      summary: summary + (+1),
+      inputCash: value,
     });
   }
 
-  doMinus = () => {
-    const { summary } = this.state;
-    this.setState({
-      summary: summary - (+1),
+  onCashChange = async () => {
+    const { inputCash, totalPrice } = this.state
+    await this.setState({
+      cashChange: inputCash - totalPrice,
     });
   }
-
 
   render() {
-    const { movie } = this.state
-    const { summary } = this.state;
+    const {
+      movie, amount, totalPrice, cashChange,
+    } = this.state
     return (
       <div>
         <Header />
@@ -83,19 +111,42 @@ export default class ticket extends Component {
                 Price :
                 {' '}
                 {movie.price}
+                {' '}
+                Perseat
               </h3>
+
+              <div>
+                <h1>Movie Ticket</h1>
+                <div>
+                  <h3>
+                    Total Price :
+                    {' '}
+                    {totalPrice}
+                  </h3>
+                </div>
+                <input type="number" value={amount} min="0" />
+                <Button onClick={this.doMinus}> - </Button>
+                <Button onClick={this.doPlus}> + </Button>
+              </div>
+
+              <div>
+                <h2>Input Money</h2>
+                <input type="number" onBlur={this.onInputCash} />
+                <Button onClick={this.onCashChange}> Pay </Button>
+              </div>
+              <div>
+                <h3>
+                  CashChange :
+                  {' '}
+                  {cashChange}
+                </h3>
+
+              </div>
+
+              <Link href={`/recipe/${movie._id}`}>
+                <Button onClick={totalPrice} type="submit">ชำระเงิน</Button>
+              </Link>
             </div>
-            <div>
-
-              <input type="number" value={summary} />
-              <Button onClick={this.doMinus}> - </Button>
-              <Button onClick={this.doPlus}> + </Button>
-            </div>
-
-            <Link href={`/ticket/${movie._id}`}>
-              <Button type="submit">ชำระเงิน</Button>
-            </Link>
-
           </Card>
         </Content>
       </div>
