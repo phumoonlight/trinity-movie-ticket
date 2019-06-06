@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 import {
-  Layout, Card, Col, Row,
+  Layout, Col, Row,
 } from 'antd'
 import Menu from './MoviesMenu'
+import MovieCard from '../app/MovieCard'
 
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
-const imgStyle = {
-  width: '100%',
-}
 
 class MoviesContainer extends Component {
   constructor(props) {
@@ -48,16 +46,12 @@ class MoviesContainer extends Component {
     const { movies } = this.state
     return movies.map(movie => (
       <Col span={6}>
-        <Card>
-          <div className="custom-image">
-            <img src={movie.image} alt="movie" style={imgStyle} />
-          </div>
-          <div className="custom-card">
-            <h3>{movie.name}</h3>
-            <div>{`${movie.price} บาท`}</div>
-            <div>{movie.date}</div>
-          </div>
-        </Card>
+        <MovieCard
+          image={movie.image}
+          name={movie.name}
+          price={movie.price}
+          date={movie.date}
+        />
       </Col>
     ))
   }

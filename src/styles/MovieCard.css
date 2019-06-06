@@ -1,0 +1,8 @@
+.movie-image img {
+  display: block;
+  width: 100%;
+}
+
+.movie-context {
+  padding: 10px 0px;
+}
