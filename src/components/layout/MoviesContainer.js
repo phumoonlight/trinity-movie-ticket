@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
 import { Layout, Col, Row } from 'antd'
 import Menu from './MoviesMenu'
 import MovieCard from '../app/MovieCard'
+import movieGetter from '../../controllers/movies'
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
@@ -13,13 +13,21 @@ class MoviesContainer extends Component {
     this.state = {
       movies: [],
     }
-    this.getMovies()
   }
 
   getMovies = async () => {
     try {
-      const result = await Axios.get('http://localhost:8080/movies')
-      await this.setState({ movies: result.data })
+      const movies = await movieGetter.getMovies()
+      await this.setState({ movies })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  searchMovies = async (key) => {
+    try {
+      const movies = await movieGetter.searchMovies(key)
+      await this.setState({ movies })
     } catch (error) {
       console.log(error)
     }
@@ -59,6 +67,16 @@ class MoviesContainer extends Component {
     ))
   }
 
+  componentDidMount = () => {
+    this.getMovies()
+  }
+
+  componentWillReceiveProps = async (nextProps) => {
+    const { searchKey } = nextProps
+    const movies = await movieGetter.searchMovies(searchKey)
+    this.setState({ movies })
+  }
+
   render() {
     return (
       <Content style={style}>
@@ -75,4 +93,5 @@ class MoviesContainer extends Component {
     )
   }
 }
+
 export default MoviesContainer
