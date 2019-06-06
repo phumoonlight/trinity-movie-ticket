@@ -35,6 +35,11 @@ class MoviesContainer extends Component {
         movies.sort((a, b) => a.price - b.price)
         break
       default:
+        movies.sort((a, b) => {
+          if (a.name < b.name) { return -1 }
+          if (a.name > b.name) { return 1 }
+          return 0
+        })
     }
     this.setState({ movies })
   }
