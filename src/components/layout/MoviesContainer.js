@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Link from 'next/link'
 import Axios from 'axios'
 import {
   Layout, Card, Col, Row,
@@ -48,16 +49,18 @@ class MoviesContainer extends Component {
     const { movies } = this.state
     return movies.map(movie => (
       <Col span={6}>
-        <Card>
-          <div className="custom-image">
-            <img src={movie.image} alt="movie" style={imgStyle} />
-          </div>
-          <div className="custom-card">
-            <h3>{movie.name}</h3>
-            <div>{`${movie.price} บาท`}</div>
-            <div>{movie.date}</div>
-          </div>
-        </Card>
+        <Link href={`/detail/${movie._id}`}>
+          <Card>
+            <div className="custom-image">
+              <img src={movie.image} alt="movie" style={imgStyle} />
+            </div>
+            <div className="custom-card">
+              <h3>{movie.name}</h3>
+              <div>{`${movie.price} บาท`}</div>
+              <div>{movie.date}</div>
+            </div>
+          </Card>
+        </Link>
       </Col>
     ))
   }
