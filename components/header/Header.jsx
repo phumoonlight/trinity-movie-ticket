@@ -1,25 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Layout } from 'antd';
 import SearchBar from './SearchBar'
-import Icon from './Icon'
+import HeaderIcon from '../HeaderIcon'
 
 import './Header.css'
 
 const { Header } = Layout;
 
-class Headers extends Component {
-  render() {
-    return (
-      <Header style={{ zIndex: 1, width: '100%' }}>
-        <Icon />
-        <div className="header">
-          <SearchBar />
-        </div>
-      </Header>
+const Headers = () => (
+  <Header style={{ zIndex: 1, width: '100%' }}>
+    <HeaderIcon />
+    <div className="header">
+      <SearchBar />
+    </div>
+  </Header>
+)
 
-
-    );
-  }
-}
 export default Headers;

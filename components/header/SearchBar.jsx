@@ -2,7 +2,7 @@ import React from 'react'
 import Router from 'next/router';
 import { Input } from 'antd';
 
-const search = async (searchKey) => {
+const search = (searchKey) => {
   Router.push(`/?searchkey=${searchKey}`)
 }
 

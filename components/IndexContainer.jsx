@@ -19,7 +19,6 @@ class IndexContainer extends Component {
     super(props)
     this.state = {
       movies: [],
-      sortType: '',
     }
     this.getMovies()
   }
@@ -29,25 +28,22 @@ class IndexContainer extends Component {
     await this.setState({ movies: result.data })
   }
 
-  getSortType = (type) => {
-    this.setState({ sortType: type })
-  }
-
-  sortMovies = (movies) => {
-    const { sortType } = this.state
-    switch (sortType) {
+  getSortType = async (type) => {
+    const { movies } = this.state
+    switch (type) {
       case 'sort-date':
-        return movies.sort((a, b) => new Date(a.date) - new Date(b.date))
+        movies.sort((a, b) => new Date(a.date) - new Date(b.date))
+        break;
       case 'sort-price':
-        return movies.sort((a, b) => a.price - b.price)
+        movies.sort((a, b) => a.price - b.price)
+        break;
       default:
-        return movies
     }
+    this.setState({ movies })
   }
 
   mapMoviesCard = () => {
-    let { movies } = this.state
-    movies = this.sortMovies(movies)
+    const { movies } = this.state
     return movies.map(movie => (
       <Col span={6}>
         <Card>
