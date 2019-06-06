@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
-import Text from '../Text'
-import './Card.css'
+import '../../styles/Card.css'
 
 const style = {
   container: { textAlign: 'center' },
@@ -34,10 +33,7 @@ class Menus extends Component {
     const { type } = this.state
     return (
       <div style={style.container}>
-        <Text
-          style={style.textHeader}
-          context="Movies"
-        />
+        <span style={style.textHeader}>Movies</span>
         <Menu
           onClick={this.setSortType}
           selectedKeys={[type]}

@@ -3,18 +3,16 @@ import Axios from 'axios'
 import {
   Layout, Card, Col, Row,
 } from 'antd'
-import Menu from './cardIndex/Menu'
-import Text from './Text'
+import Menu from './MoviesMenu'
 
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
 const imgStyle = {
   width: '100%',
-  height: '23rem',
 }
 
-class IndexContainer extends Component {
+class MoviesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,8 +22,12 @@ class IndexContainer extends Component {
   }
 
   getMovies = async () => {
-    const result = await Axios.get('http://localhost:8080/movies')
-    await this.setState({ movies: result.data })
+    try {
+      const result = await Axios.get('http://localhost:8080/movies')
+      await this.setState({ movies: result.data })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   getSortType = async (type) => {
@@ -52,8 +54,8 @@ class IndexContainer extends Component {
           </div>
           <div className="custom-card">
             <h3>{movie.name}</h3>
-            <Text style={{ display: 'block' }} context={`${movie.price} บาท`} />
-            <Text style={{ display: 'block' }} context={movie.date} />
+            <div>{`${movie.price} บาท`}</div>
+            <div>{movie.date}</div>
           </div>
         </Card>
       </Col>
@@ -69,4 +71,4 @@ class IndexContainer extends Component {
     )
   }
 }
-export default IndexContainer
+export default MoviesContainer
