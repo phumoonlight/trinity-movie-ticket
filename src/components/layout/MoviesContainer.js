@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
 import Axios from 'axios'
-import {
-  Layout, Card, Col, Row,
-} from 'antd'
+import { Layout, Col, Row } from 'antd'
 import Menu from './MoviesMenu'
+import MovieCard from '../app/MovieCard'
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
-const imgStyle = {
-  width: '100%',
-}
 
 class MoviesContainer extends Component {
   constructor(props) {
@@ -47,19 +42,14 @@ class MoviesContainer extends Component {
   mapMoviesCard = () => {
     const { movies } = this.state
     return movies.map(movie => (
-      <Col span={6}>
-        <Link href={`/detail/${movie._id}`}>
-          <Card>
-            <div className="custom-image">
-              <img src={movie.image} alt="movie" style={imgStyle} />
-            </div>
-            <div className="custom-card">
-              <h3>{movie.name}</h3>
-              <div>{`${movie.price} บาท`}</div>
-              <div>{movie.date}</div>
-            </div>
-          </Card>
-        </Link>
+      <Col span={5} style={{ marginBottom: '1rem' }}>
+        <MovieCard
+          id={movie._id}
+          image={movie.image}
+          name={movie.name}
+          price={movie.price}
+          date={movie.date}
+        />
       </Col>
     ))
   }
@@ -68,7 +58,14 @@ class MoviesContainer extends Component {
     return (
       <Content style={style}>
         <Menu get={this.getSortType} />
-        <Row gutter={16}>{this.mapMoviesCard()}</Row>
+        <Row
+          style={{ marginTop: '2rem' }}
+          type="flex"
+          justify="center"
+          gutter={16}
+        >
+          {this.mapMoviesCard()}
+        </Row>
       </Content>
     )
   }
