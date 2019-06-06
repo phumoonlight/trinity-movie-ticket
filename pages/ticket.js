@@ -35,7 +35,9 @@ export default class ticket extends Component {
   state = {
     movie: '',
     amount: 0,
+    inputCash: 0,
     totalPrice: 0,
+    cashChange: 0,
   }
 
   static getInitialProps({ query: { id } }) {
@@ -68,15 +70,31 @@ export default class ticket extends Component {
     this.setTotalPrice()
   }
 
-  setTotalPrice = () => {
+  setTotalPrice = async () => {
     const { movie, amount } = this.state;
-    this.setState({
+    await this.setState({
       totalPrice: amount * movie.price,
     })
   }
 
+  onInputCash = (e) => {
+    const { value } = e.target;
+    this.setState({
+      inputCash: value,
+    });
+  }
+
+  onCashChange = async () => {
+    const { inputCash, totalPrice } = this.state
+    await this.setState({
+      cashChange: inputCash - totalPrice,
+    });
+  }
+
   render() {
-    const { movie, amount, totalPrice } = this.state
+    const {
+      movie, amount, totalPrice, cashChange,
+    } = this.state
     return (
       <div>
         <Header />
@@ -93,21 +111,40 @@ export default class ticket extends Component {
                 Price :
                 {' '}
                 {movie.price}
+                {' '}
+                Perseat
               </h3>
 
               <div>
-                <h2>Seat</h2>
+                <h1>Movie Ticket</h1>
+                <div>
+                  <h3>
+                    Total Price :
+                    {' '}
+                    {totalPrice}
+                  </h3>
+                </div>
                 <input type="number" value={amount} min="0" />
                 <Button onClick={this.doMinus}> - </Button>
                 <Button onClick={this.doPlus}> + </Button>
               </div>
+
               <div>
-                <h2>Price</h2>
-                <div>{totalPrice}</div>
+                <h2>Input Money</h2>
+                <input type="number" onBlur={this.onInputCash} />
+                <Button onClick={this.onCashChange}> Pay </Button>
+              </div>
+              <div>
+                <h3>
+                  CashChange :
+                  {' '}
+                  {cashChange}
+                </h3>
+
               </div>
 
-              <Link href={`/ticket/${movie._id}`}>
-                <Button type="submit">ชำระเงิน</Button>
+              <Link href={`/recipe/${movie._id}`}>
+                <Button onClick={totalPrice} type="submit">ชำระเงิน</Button>
               </Link>
             </div>
           </Card>
