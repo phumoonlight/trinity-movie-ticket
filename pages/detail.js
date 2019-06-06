@@ -6,9 +6,8 @@ import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
-// import Card from '../src/components/common/Card'
 import moviesApi from '../src/controllers/movies'
-import '../src/styles/Card.css'
+import '../src/styles/MovieCard.css'
 
 const { Content } = Layout
 
@@ -17,7 +16,6 @@ const style = {
   paddingTop: '1.5',
   width: '75%',
   margin: 'auto',
-  marginTop: '0.5em',
 }
 
 const imgStyle = {
@@ -25,6 +23,7 @@ const imgStyle = {
   width: '24em',
   float: 'left',
 }
+
 const card = {
   backgroundColor: '#E5E5E5',
 }
