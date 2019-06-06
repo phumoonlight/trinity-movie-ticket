@@ -22,7 +22,7 @@ const style = {
 
 const imgStyle = {
   margin: 'auto',
-  width: '20%',
+  width: '30%',
   float: 'left',
   padding: '10px',
 }
@@ -34,8 +34,8 @@ const card = {
 export default class ticket extends Component {
   state = {
     movie: '',
-    summary: 0,
-
+    amount: 0,
+    totalPrice: 0,
   }
 
   static getInitialProps({ query: { id } }) {
@@ -45,28 +45,38 @@ export default class ticket extends Component {
 
   componentDidMount = async () => {
     const { postId } = this.props
-    const data = await moviesApi.getMoviesById(postId)
-    this.setState({ movie: data })
+    const movie = await moviesApi.getMoviesById(postId)
+    this.setState({ movie })
   }
 
-  doPlus = () => {
-    const { summary } = this.state;
-    this.setState({
-      summary: summary + (+1),
+  doPlus = async () => {
+    const { amount } = this.state;
+    await this.setState({
+      amount: amount + (+1),
     });
+    this.setTotalPrice()
   }
 
-  doMinus = () => {
-    const { summary } = this.state;
-    this.setState({
-      summary: summary - (+1),
+  doMinus = async () => {
+    let { amount } = this.state;
+    if (amount === 0) {
+      amount += 1
+    }
+    await this.setState({
+      amount: amount - (+1),
     });
+    this.setTotalPrice()
   }
 
+  setTotalPrice = () => {
+    const { movie, amount } = this.state;
+    this.setState({
+      totalPrice: amount * movie.price,
+    })
+  }
 
   render() {
-    const { movie } = this.state
-    const { summary } = this.state;
+    const { movie, amount, totalPrice } = this.state
     return (
       <div>
         <Header />
@@ -84,18 +94,22 @@ export default class ticket extends Component {
                 {' '}
                 {movie.price}
               </h3>
+
+              <div>
+                <h2>Seat</h2>
+                <input type="number" value={amount} min="0" />
+                <Button onClick={this.doMinus}> - </Button>
+                <Button onClick={this.doPlus}> + </Button>
+              </div>
+              <div>
+                <h2>Price</h2>
+                <div>{totalPrice}</div>
+              </div>
+
+              <Link href={`/ticket/${movie._id}`}>
+                <Button type="submit">ชำระเงิน</Button>
+              </Link>
             </div>
-            <div>
-
-              <input type="number" value={summary} />
-              <Button onClick={this.doMinus}> - </Button>
-              <Button onClick={this.doPlus}> + </Button>
-            </div>
-
-            <Link href={`/ticket/${movie._id}`}>
-              <Button type="submit">ชำระเงิน</Button>
-            </Link>
-
           </Card>
         </Content>
       </div>
