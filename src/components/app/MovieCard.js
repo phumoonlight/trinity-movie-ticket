@@ -14,14 +14,12 @@ const MovieCard = (props) => {
   } = props
   return (
     <Link href={`/detail/${id}`}>
-      <Card style={{ cursor: 'pointer' }}>
-        <div className="movie-image">
-          <img src={image} alt={name} />
-        </div>
+      <Card style={{ cursor: 'pointer', padding: '0' }}>
+        <img className="movie-image" src={image} alt={name} />
         <div className="movie-context">
-          <h3>{name}</h3>
+          <div className="title">{name}</div>
           <div>{`${price} บาท`}</div>
-          <div>{date}</div>
+          <div>{`วันที่เข้าฉาย ${date}`}</div>
         </div>
       </Card>
     </Link>
