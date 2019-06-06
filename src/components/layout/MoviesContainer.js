@@ -44,6 +44,7 @@ class MoviesContainer extends Component {
     return movies.map(movie => (
       <Col span={5} style={{ marginBottom: '1rem' }}>
         <MovieCard
+          id={movie._id}
           image={movie.image}
           name={movie.name}
           price={movie.price}
