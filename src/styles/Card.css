@@ -10,16 +10,9 @@
   .ant-carousel .slick-slide h3 {
     color: #fff;
   }
-.custom-image img {
-    display: block;
-  }
   .custom-card {
-    padding: 10px 0px;
-  }
-  .custom-card p {
-    color: #999;
+    padding: 1.5em;
   }
   .menu{
     float: center;
   }
-  

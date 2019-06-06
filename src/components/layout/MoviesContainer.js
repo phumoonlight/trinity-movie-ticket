@@ -6,7 +6,6 @@ import {
 } from 'antd'
 import Menu from './MoviesMenu'
 
-
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
 const imgStyle = {
@@ -36,10 +35,10 @@ class MoviesContainer extends Component {
     switch (type) {
       case 'sort-date':
         movies.sort((a, b) => new Date(a.date) - new Date(b.date))
-        break;
+        break
       case 'sort-price':
         movies.sort((a, b) => a.price - b.price)
-        break;
+        break
       default:
     }
     this.setState({ movies })

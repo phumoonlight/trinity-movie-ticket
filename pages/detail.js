@@ -1,41 +1,41 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {
-  Layout,
-  Card,
-  Col,
-  Row,
+  Layout, Card, Button, PageHeader,
 } from 'antd'
+import Header from '../src/components/layout/Header'
+// import Card from '../src/components/common/Card'
 import moviesApi from '../src/controllers/movies'
+import '../src/styles/Card.css'
 
 const { Content } = Layout
-const style = { padding: '1em', marginTop: '5em' }
+
+const style = {
+  padding: '1.5em',
+  paddingTop: '1.5',
+  width: '75%',
+  margin: 'auto',
+  marginTop: '0.5em',
+}
+
 const imgStyle = {
-  margin: 'auto',
-  width: '20%',
+  padding: '1em',
+  width: '24em',
   float: 'left',
-  // border: '3px solid green',
-  padding: '10px',
+}
+const card = {
+  backgroundColor: '#E5E5E5',
 }
 
-const cardStyle = {
-  margin: 'auto',
-  width: '80%',
-  right: '100px',
-  // border: '3px solid red',
-  padding: '5em',
-}
-const buttonDe = {
 
-}
 export default class detail extends Component {
 state = {
   movie: '',
 }
 
 static getInitialProps({ query: { id } }) {
-  console.log('ssss')
   return { postId: id }
 }
 
@@ -49,42 +49,34 @@ componentDidMount = async () => {
 render() {
   const { movie } = this.state
   return (
-    <Content style={style}>
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card>
-            <div style={cardStyle}>
+    <div>
+      <Header />
+      <Content style={style}>
+        <PageHeader onBack={() => Router.push('/index')} title="Detail" subTitle="This is a subtitle" />
+        <Card style={card}>
+          <div>
+            <img src={movie.image} alt="movie" style={imgStyle} />
+          </div>
 
-              <h3>{movie.name}</h3>
-              <div className="jsx-2 topic-content">
-                <img src={movie.image} alt="movie" style={imgStyle} />
-              </div>
-              <br />
-              <div className="custom-card">
-                <h3>{movie.name}</h3>
-              </div>
-              {movie.name}
-              <br />
-              {movie.detail}
-              <br />
-              <br />
-              <h3>
-ราคา :
-                {movie.price}
-              </h3>
-              <div className="buttonDetail">
-                <Link href={`/ticket/${movie._id}`}>
-                  <button type="submit" style={buttonDe}>ชำระเงิน</button>
-                </Link>
+          <div className="custom-card">
+            <h1>{movie.name}</h1>
+            {movie.detail}
+          </div>
 
-              </div>
+          <div className="custom-card">
+            <h3>
+                Price :
+              {' '}
+              {movie.price}
+            </h3>
+            <Link href={`/ticket/${movie._id}`}>
+              <Button type="submit">ชำระเงิน</Button>
+            </Link>
+          </div>
+        </Card>
+      </Content>
+    </div>
 
-
-            </div>
-          </Card>
-        </Col>
-      </Row>
-    </Content>
   )
 }
 }
