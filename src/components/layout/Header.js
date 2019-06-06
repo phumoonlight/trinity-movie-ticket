@@ -1,12 +1,15 @@
 import React from 'react'
+import Link from 'next/link'
 import { Layout } from 'antd';
 import SearchBar from '../common/SearchBar'
-import HeaderIcon from '../app/HeaderIcon'
+import '../../styles/Header.css'
 
 const { Header } = Layout;
 const HeaderComponent = () => (
   <Header>
-    <HeaderIcon />
+    <Link href="/index">
+      <a className="header-link">Homepage</a>
+    </Link>
     <SearchBar />
   </Header>
 )
