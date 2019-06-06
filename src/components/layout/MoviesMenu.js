@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
-import '../../styles/Card.css'
+import '../../styles/MovieCard.css'
 
 const style = {
   container: { textAlign: 'center' },
