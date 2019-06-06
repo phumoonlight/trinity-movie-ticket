@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Card } from 'antd'
+import '../../styles/MovieCard.css'
 
 const MovieCard = (props) => {
   const {
-    image, name, price, date,
+    image,
+    name,
+    price,
+    date,
   } = props
   return (
     <Card>
