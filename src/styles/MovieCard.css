@@ -1,7 +1,8 @@
 .movie-image {
   display: block;
-  width: 100%;
-  height: 28rem;
+  width: 185px;
+  height: 285px;
+  margin: auto;
 }
 
 .movie-context > .title {
@@ -9,5 +10,5 @@
   font-weight: bold;
   color: rgb(85, 175, 235);
   padding: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
