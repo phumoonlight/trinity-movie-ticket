@@ -59,25 +59,12 @@ export default class recipe extends Component {
             <div>
               <img src={movie.image} alt="movie" style={imgStyle} />
             </div>
-
             <div className="custom-card">
               <h1>{movie.name}</h1>
               <h2>Recipe</h2>
-              <div>
-                ID :
-                {' '}
-                {movie._id}
-              </div>
-              <div>
-                Date :
-                {' '}
-                {movie.date}
-              </div>
-              <div>
-                TotalPrice :
-                {' '}
-                {totalPrice}
-              </div>
+              <div>{`ID : ${movie._id}`}</div>
+              <div>{`Date : ${movie.date}`}</div>
+              <div>{`TotalPrice : ${totalPrice}`}</div>
               <Link href="/index/">
                 <Button type="submit">Home</Button>
               </Link>

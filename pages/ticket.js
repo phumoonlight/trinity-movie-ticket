@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {
-  Layout, Card, Button, PageHeader,
+  Layout, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
 import Footer from '../src/components/layout/Footer'
