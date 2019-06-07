@@ -6,6 +6,7 @@ import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
+import Footer from '../src/components/layout/Footer'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
 
@@ -83,6 +84,7 @@ export default class recipe extends Component {
             </div>
           </Card>
         </Content>
+        <Footer />
       </div>
     )
   }
