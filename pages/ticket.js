@@ -6,7 +6,7 @@ import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
-import moviesApi from '../src/controllers/movies'
+import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
 
 
