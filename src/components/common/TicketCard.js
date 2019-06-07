@@ -64,7 +64,7 @@ class TicketCard extends React.Component {
           <div>ใส่จำนวนเงิน</div>
           <input type="number" onChange={this.onInputCash} />
           <div>{`เงินทอนที่จะได้รับ ${cashChange} บาท`}</div>
-          <Link href={`/recipe/${id}`}>
+          <Link href={`/recipe/${id}?total=${totalPrice}`}>
             <Button type="submit">ชำระเงิน</Button>
           </Link>
         </div>
