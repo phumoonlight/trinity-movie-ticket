@@ -1,17 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import Router from 'next/router'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import {
-  Layout, PageHeader,
-} from 'antd'
+import { Layout, PageHeader } from 'antd'
 import Header from '../src/components/layout/Header'
 import Footer from '../src/components/layout/Footer'
 import moviesApi from '../src/services/movies'
-import '../src/styles/MovieCard.css'
-import { summaryAction } from '../store'
 import TicketCard from '../src/components/common/TicketCard'
+import '../src/styles/MovieCard.css'
 import 'antd/dist/antd.css'
 
 
@@ -24,7 +19,7 @@ const style = {
   margin: 'auto',
 }
 
-export default class ticket extends Component {
+class Ticket extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,12 +28,12 @@ export default class ticket extends Component {
   }
 
   static getInitialProps({ query: { id } }) {
-    return { postId: id }
+    return { movieId: id }
   }
 
   componentDidMount = async () => {
-    const { postId } = this.props
-    const movie = await moviesApi.getMoviesById(postId)
+    const { movieId } = this.props
+    const movie = await moviesApi.getMoviesById(movieId)
     this.setState({ movie })
   }
 
@@ -66,18 +61,9 @@ export default class ticket extends Component {
     )
   }
 }
-function mapStateToProps(state) {
-  const { number } = state
-  return { number }
-}
 
-const mapDispatchToProps = dispatch => bindActionCreators({ summaryAction }, dispatch)
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ticket)
+export default Ticket
 
-
-ticket.propTypes = {
-  postId: PropTypes.string.isRequired,
+Ticket.propTypes = {
+  movieId: PropTypes.string.isRequired,
 }
