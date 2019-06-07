@@ -6,7 +6,8 @@ import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
-import moviesApi from '../src/services/movies'
+import Footer from '../src/components/layout/Footer'
+import movieServices from '../src/services/movies'
 import '../src/styles/MovieCard.css'
 
 
@@ -41,7 +42,7 @@ static getInitialProps({ query: { id } }) {
 
 componentDidMount = async () => {
   const { postId } = this.props
-  const data = await moviesApi.getMoviesById(postId)
+  const data = await movieServices.getMoviesById(postId)
   this.setState({ movie: data })
 }// try
 
@@ -75,6 +76,7 @@ render() {
           </div>
         </Card>
       </Content>
+      <Footer />
     </div>
   )
 }
