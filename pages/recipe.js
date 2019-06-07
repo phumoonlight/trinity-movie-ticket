@@ -52,14 +52,33 @@ class recipe extends Component {
     console.log('-----------')
     console.log(sum)
 
-    const movie = await moviesApi.getMoviesById(postId)
+    const movie = await moviesApi.getMoviesById(postId, total, sum)
     this.setState({ movie })
   }
 
-  render() {
-    const { movie, totalPrice, total } = this.state
-    // const { number } = this.props
+  showReturnCash = (sum) => {
+    let cash = sum
+    const cashArr = [1000, 500, 100, 50, 20, 10, 5, 2, 1]
+    const returnCashArr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let i = 0
+    while (cash > 0) {
+      cash -= cashArr[i]
+      if (cash < cashArr[i]) {
+        i += 1
+      } else {
+        returnCashArr[i] += 1
+      }
+      if (i > 8) break
+    }
+    return returnCashArr
+  }
 
+  render() {
+    const { movie } = this.state
+    const { total, sum } = this.props
+    // const cash = this.showReturnCash(sum)
+    // console.log(cash);
+    
     return (
       <div>
         <Header />
@@ -74,7 +93,8 @@ class recipe extends Component {
               <h2>Recipe</h2>
               <div>{`ID : ${movie._id}`}</div>
               <div>{`Date : ${movie.date}`}</div>
-              <div>{`TotalPrice : ${totalPrice}`}</div>
+              <div>{`TotalPrice : ${total}`}</div>
+              <div>{`CashChange : ${sum}`}</div>
               <Link href="/index/">
                 <Button type="submit">Home</Button>
               </Link>
