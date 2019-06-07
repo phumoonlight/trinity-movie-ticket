@@ -8,9 +8,15 @@ import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
 import Header from '../src/components/layout/Header'
+import Footer from '../src/components/layout/Footer'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
+<<<<<<< HEAD
 import { summaryAction } from '../store'
+=======
+import TicketCard from '../src/components/common/TicketCard'
+import 'antd/dist/antd.css'
+>>>>>>> af24f215fed5364aac46df71b582c21807145652
 
 
 const { Content } = Layout
@@ -22,6 +28,7 @@ const style = {
   margin: 'auto',
 }
 
+<<<<<<< HEAD
 
 const imgStyle = {
   margin: 'auto',
@@ -41,12 +48,19 @@ class ticket extends Component {
     inputCash: 0,
     totalPrice: 0,
     cashChange: 0,
+=======
+export default class ticket extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      movie: '',
+    }
+>>>>>>> af24f215fed5364aac46df71b582c21807145652
   }
 
   static getInitialProps({ query: { id } }) {
     return { postId: id }
   }
-
 
   componentDidMount = async () => {
     const { postId } = this.props
@@ -54,6 +68,7 @@ class ticket extends Component {
     this.setState({ movie })
   }
 
+<<<<<<< HEAD
   doPlus = async () => {
     const { amount } = this.state;
     await this.setState({
@@ -94,16 +109,20 @@ class ticket extends Component {
       cashChange: inputCash - totalPrice,
 
     });
+=======
+  goToDetail = () => {
+    const { movie } = this.state
+    Router.push(`/detail/${movie._id}`)
+>>>>>>> af24f215fed5364aac46df71b582c21807145652
   }
 
   render() {
-    const {
-      movie, amount, totalPrice, cashChange,
-    } = this.state
+    const { movie } = this.state
     return (
       <div>
         <Header />
         <Content style={style}>
+<<<<<<< HEAD
           <PageHeader onBack={() => Router.push(`/detail/${movie._id}`)} title="Ticket" subTitle="Buy Ticket" />
           <Card style={card}>
             <div>
@@ -155,7 +174,17 @@ class ticket extends Component {
               </Link>
             </div>
           </Card>
+=======
+          <PageHeader onBack={this.goToDetail} title="Ticket" subTitle={movie.name} />
+          <TicketCard
+            id={movie._id}
+            image={movie.image}
+            name={movie.name}
+            price={movie.price}
+          />
+>>>>>>> af24f215fed5364aac46df71b582c21807145652
         </Content>
+        <Footer />
       </div>
     )
   }

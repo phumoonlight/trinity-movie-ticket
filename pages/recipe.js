@@ -9,6 +9,7 @@ import {
 // import { bindActionCreators } from 'redux'
 // import { summaryAction } from '../store'
 import Header from '../src/components/layout/Header'
+import Footer from '../src/components/layout/Footer'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
 
@@ -90,6 +91,7 @@ class recipe extends Component {
             </div>
           </Card>
         </Content>
+        <Footer />
       </div>
     )
   }
