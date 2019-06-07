@@ -33,18 +33,23 @@ const card = {
 }
 
 export default class ticket extends Component {
-  state = {
-    movie: '',
-    amount: 0,
-    inputCash: 0,
-    totalPrice: 0,
-    cashChange: 0,
+  constructor(props) {
+    super(props)
+    this.state = {
+      movie: '',
+      amount: 0,
+      totalPrice: 0,
+      cashInput: 0,
+    }
   }
 
   static getInitialProps({ query: { id } }) {
     return { postId: id }
   }
 
+  componentWillMount() {
+    this.inputTimer = null;
+  }
 
   componentDidMount = async () => {
     const { postId } = this.props
@@ -71,30 +76,22 @@ export default class ticket extends Component {
     this.setTotalPrice()
   }
 
-  setTotalPrice = async () => {
+  setTotalPrice = () => {
     const { movie, amount } = this.state;
-    await this.setState({
+    this.setState({
       totalPrice: amount * movie.price,
     })
   }
 
   onInputCash = (e) => {
-    const { value } = e.target;
     this.setState({
-      inputCash: value,
-    });
-  }
-
-  onCashChange = async () => {
-    const { inputCash, totalPrice } = this.state
-    await this.setState({
-      cashChange: inputCash - totalPrice,
+      cashInput: e.target.value,
     });
   }
 
   render() {
     const {
-      movie, amount, totalPrice, cashChange,
+      movie, amount, totalPrice, cashInput,
     } = this.state
     return (
       <div>
@@ -108,42 +105,16 @@ export default class ticket extends Component {
 
             <div className="custom-card">
               <h1>{movie.name}</h1>
-              <h3>
-                Price :
-                {' '}
-                {movie.price}
-                {' '}
-                Perseat
-              </h3>
-
+              <h3>{`ราคา ${movie.price} บาท / ที่นั่ง`}</h3>
               <div>
-                <h1>Movie Ticket</h1>
-                <div>
-                  <h3>
-                    Total Price :
-                    {' '}
-                    {totalPrice}
-                  </h3>
-                </div>
                 <input type="number" value={amount} min="0" />
                 <Button onClick={this.doMinus}> - </Button>
                 <Button onClick={this.doPlus}> + </Button>
+                <div>{`ราคารวมทั้งหมด ${totalPrice} บาท`}</div>
               </div>
-
-              <div>
-                <h2>Input Money</h2>
-                <input type="number" onBlur={this.onInputCash} />
-                <Button onClick={this.onCashChange}> Pay </Button>
-              </div>
-              <div>
-                <h3>
-                  CashChange :
-                  {' '}
-                  {cashChange}
-                </h3>
-
-              </div>
-
+              <div>ใส่จำนวนเงิน</div>
+              <input type="number" onChange={this.onInputCash} />
+              <div>{`เงินทอนที่จะได้รับ ${cashInput - totalPrice} บาท`}</div>
               <Link href={`/recipe/${movie._id}`}>
                 <Button onClick={totalPrice} type="submit">ชำระเงิน</Button>
               </Link>
