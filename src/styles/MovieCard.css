@@ -11,6 +11,9 @@
   color: rgb(85, 175, 235);
   padding: 1rem;
   font-size: 1.1rem;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .custom-card {
