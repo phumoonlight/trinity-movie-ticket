@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Card } from 'antd'
 import Link from 'next/link'
+import moment from 'moment'
 import '../../styles/MovieCard.css'
 
 const MovieCard = (props) => {
@@ -12,14 +13,15 @@ const MovieCard = (props) => {
     price,
     date,
   } = props
+  const formatDate = moment(date).format('DD/MM/YYYY')
   return (
     <Link href={`/detail/${id}`}>
       <Card style={{ cursor: 'pointer', padding: '0' }}>
         <img className="movie-image" src={image} alt={name} />
         <div className="movie-context">
           <div className="title">{name}</div>
-          <div>{`${price} บาท`}</div>
-          <div>{`วันที่เข้าฉาย ${date}`}</div>
+          <div className="date">{`วันที่เข้าฉาย ${formatDate}`}</div>
+          <div className="price">{`${price} บาท`}</div>
         </div>
       </Card>
     </Link>
