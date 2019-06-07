@@ -39,16 +39,19 @@ class recipe extends Component {
     movie: '',
   }
 
-  static getInitialProps({ query: { id, total } }) {
+  static getInitialProps({ query: { id, total, sum } }) {
     return {
-      postId: id, total,
+      postId: id, total, sum,
     }
   }
 
   componentDidMount = async () => {
-    const { postId, total } = this.props
+    const { postId, total, sum } = this.props
 
     console.log(total)
+    console.log('-----------')
+    console.log(sum)
+
     const movie = await moviesApi.getMoviesById(postId)
     this.setState({ movie })
   }
