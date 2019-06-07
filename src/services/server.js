@@ -8,11 +8,11 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
   const server = express()
-
+  server.get('/redux', (req, res) => app.render(req, res, '/redux'))
   server.get('/index', (req, res) => app.render(req, res, '/index'))
   server.get('/detail/:id', (req, res) => app.render(req, res, '/detail', { id: req.params.id }))
   server.get('/ticket/:id', (req, res) => app.render(req, res, '/ticket', { id: req.params.id }))
-  server.get('/recipe/:id', (req, res) => app.render(req, res, '/recipe', { id: req.params.id }))
+  server.get('/recipe/:id', (req, res) => app.render(req, res, '/recipe', { id: req.params.id, total: req.query.total }))
   server.get('*', (req, res) => handle(req, res))
 
   server.listen(port, (err) => {

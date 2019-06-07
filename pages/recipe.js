@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Layout, Card, Button, PageHeader,
 } from 'antd'
+// import { bindActionCreators } from 'redux'
+// import { summaryAction } from '../store'
 import Header from '../src/components/layout/Header'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
@@ -31,23 +34,25 @@ const card = {
   backgroundColor: '#E5E5E5',
 }
 
-export default class recipe extends Component {
+class recipe extends Component {
   state = {
     movie: '',
   }
 
-  static getInitialProps({ query: { id } }) {
-    return { postId: id }
+  static getInitialProps({ query: { id, total } }) {
+    return { postId: id, total }
   }
 
   componentDidMount = async () => {
-    const { postId } = this.props
+    const { postId, total } = this.props
+    console.log(total)
     const movie = await moviesApi.getMoviesById(postId)
     this.setState({ movie })
   }
 
   render() {
-    const { movie, totalPrice } = this.state
+    const { movie, totalPrice, total } = this.state
+    // const { number } = this.props
 
     return (
       <div>
@@ -75,7 +80,9 @@ export default class recipe extends Component {
               <div>
                 TotalPrice :
                 {' '}
+                {movie.total}
                 {totalPrice}
+                {/* {number} */}
               </div>
               <Link href="/index/">
                 <Button type="submit">Home</Button>
@@ -87,7 +94,15 @@ export default class recipe extends Component {
     )
   }
 }
-
+function mapStateToProps(state) {
+  const { number } = state
+  return { number }
+}
+// const mapDispatchToProps = dispatch => bindActionCreators({ summaryAction }, dispatch)
+export default connect(
+  mapStateToProps,
+  null,
+)(recipe)
 
 recipe.propTypes = {
   postId: PropTypes.string.isRequired,

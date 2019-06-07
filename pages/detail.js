@@ -69,7 +69,7 @@ render() {
               {movie.price}
             </h3>
             <Link href={`/ticket/${movie._id}`}>
-              <Button type="submit">ชำระเงิน</Button>
+              <Button>ชำระเงิน</Button>
             </Link>
           </div>
         </Card>

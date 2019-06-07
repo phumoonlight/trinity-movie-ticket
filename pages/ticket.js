@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Link from 'next/link'
 import Router from 'next/router'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import {
   Layout, Card, Button, PageHeader,
@@ -8,6 +10,7 @@ import {
 import Header from '../src/components/layout/Header'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
+import { summaryAction } from '../store'
 
 
 const { Content } = Layout
@@ -31,7 +34,7 @@ const card = {
   backgroundColor: '#E5E5E5',
 }
 
-export default class ticket extends Component {
+class ticket extends Component {
   state = {
     movie: '',
     amount: 0,
@@ -86,8 +89,10 @@ export default class ticket extends Component {
 
   onCashChange = async () => {
     const { inputCash, totalPrice } = this.state
+    // this.props.summaryAction(inputCash - totalPrice)
     await this.setState({
       cashChange: inputCash - totalPrice,
+
     });
   }
 
@@ -138,13 +143,15 @@ export default class ticket extends Component {
                 <h3>
                   CashChange :
                   {' '}
+                  {this.props.number}
+                  <br />
                   {cashChange}
                 </h3>
 
               </div>
 
-              <Link href={`/recipe/${movie._id}`}>
-                <Button onClick={totalPrice} type="submit">ชำระเงิน</Button>
+              <Link href={`/recipe/${movie._id}?total=${cashChange}`}>
+                <Button onClick={totalPrice}>ชำระเงิน</Button>
               </Link>
             </div>
           </Card>
@@ -153,6 +160,16 @@ export default class ticket extends Component {
     )
   }
 }
+function mapStateToProps(state) {
+  const { number } = state
+  return { number }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({ summaryAction }, dispatch)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ticket)
 
 
 ticket.propTypes = {
