@@ -20,8 +20,8 @@ const MovieCard = (props) => {
         <img className="movie-image" src={image} alt={name} />
         <div className="movie-context">
           <div className="title">{name}</div>
-          <div>{`${price} บาท`}</div>
-          <div>{`วันที่เข้าฉาย ${formatDate}`}</div>
+          <div className="date">{`วันที่เข้าฉาย ${formatDate}`}</div>
+          <div className="price">{`${price} บาท`}</div>
         </div>
       </Card>
     </Link>

@@ -5,15 +5,24 @@
   margin: auto;
 }
 
-.movie-context > .title {
+.movie-context > .date,
+.movie-context > .title,
+.movie-context > .price {
   text-align: center;
+}
+
+.movie-context > .title {
   font-weight: bold;
-  color: rgb(85, 175, 235);
+  color: rgb(45, 45, 45);
   padding: 1rem;
   font-size: 1.1rem;
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.movie-context > .date {
+  color: rgb(25, 85, 150);
 }
 
 .custom-card {
