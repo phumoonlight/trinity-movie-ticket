@@ -9,6 +9,7 @@ import Header from '../src/components/layout/Header'
 import moviesApi from '../src/services/movies'
 import '../src/styles/MovieCard.css'
 
+
 const { Content } = Layout
 
 const style = {
@@ -75,7 +76,6 @@ render() {
         </Card>
       </Content>
     </div>
-
   )
 }
 }
