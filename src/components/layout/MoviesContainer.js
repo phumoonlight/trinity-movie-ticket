@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Layout, Col, Row } from 'antd'
 import Menu from './MoviesMenu'
-import MovieCard from '../app/MovieCard'
-import movieGetter from '../../controllers/movies'
+import MovieCard from '../common/MovieCard'
+import movieGetter from '../../services/movies'
 
 const { Content } = Layout
 const style = { padding: '1em', marginTop: '5em' }
