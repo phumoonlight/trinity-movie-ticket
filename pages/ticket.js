@@ -62,8 +62,8 @@ class Ticket extends React.Component {
   }
 }
 
+export default Ticket
+
 Ticket.propTypes = {
   movieId: PropTypes.string.isRequired,
 }
-
-export default Ticket

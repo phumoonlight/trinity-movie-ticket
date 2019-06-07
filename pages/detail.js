@@ -58,20 +58,14 @@ render() {
           <div>
             <img src={movie.image} alt="movie" style={imgStyle} />
           </div>
-
           <div className="custom-card">
             <h1>{movie.name}</h1>
             {movie.detail}
           </div>
-
           <div className="custom-card">
-            <h3>
-                Price :
-              {' '}
-              {movie.price}
-            </h3>
+            <h3>{`ราคา : ${movie.price}`}</h3>
             <Link href={`/ticket/${movie._id}`}>
-              <Button type="submit">ชำระเงิน</Button>
+              <Button>ชำระเงิน</Button>
             </Link>
           </div>
         </Card>
